@@ -20,6 +20,9 @@ public class MyRouteBuilder extends RouteBuilder {
                 .when(xpath("/person/city = 'London'"))
                     .log("UK message")
                     .to("file:target/messages/uk")
+                .when(xpath("/person/city = 'Karlsruhe'"))
+                    .log("DE message")
+                    .to("file:target/messages/de")
                 .otherwise()
                     .log("Other message")
                     .to("file:target/messages/others");
