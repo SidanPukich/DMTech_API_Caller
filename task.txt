@@ -24,7 +24,7 @@ mvn archetype:generate -DarchetypeGroupId=org.apache.camel.archetypes -Darchetyp
 ## Aufgabe 2
 
 1. Dupliziere ein XML aus src/data, nenne sie bspw. message3.xml, ändere die Namen sowie die city auf "Karlsruhe"
-2. Mach dich etwas mit der Doku zur File-Component vertraut: baden württemberg
+2. Mach dich etwas mit der Doku zur File-Component vertraut: https://camel.apache.org/components/latest/file-component.html
 3. Passe die Route so an
   4. dass XMLs mit city=Karlsruhe im Ordner target/messages/de landen
   5. dass XMLs mit city=London
