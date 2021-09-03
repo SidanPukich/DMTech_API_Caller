@@ -1,0 +1,20 @@
+{
+"person": [
+{ "firstName": "Nico",
+"lastName": "Lambing",
+"city": "Karlsruhe"
+},
+{ "firstName": "Jens",
+"lastName": "Weber",
+"city": "Karlsruhe"
+},
+{ "firstName": "Nikita",
+"lastName": "Nesterov",
+"city": "London"
+},
+{ "firstName": "Sidan",
+"lastName": "Pukich",
+"city": "Berlin"
+}
+]
+}
