@@ -1,6 +1,7 @@
 package student;
 
 import org.apache.camel.Predicate;
+import org.apache.camel.builder.PredicateBuilder;
 import org.apache.camel.builder.RouteBuilder;
 
 /**
@@ -12,6 +13,7 @@ public class MyRouteBuilder extends RouteBuilder {
      * Let's configure the Camel routing rules using Java code...
      */
     public void configure() {
+
         Predicate personLondonxpath = xpath("/person/city = 'London'");
         Predicate personLondonjsonpath = jsonpath("$..person[?(@.city=='London')]");
 //        Predicate personLondon = PredicateBuilder.or(personLondonxpath, personLondonjsonpath);
@@ -24,19 +26,25 @@ public class MyRouteBuilder extends RouteBuilder {
         // here is a sample which processes the input files
         // (leaving them in place - see the 'noop' flag)
         // then performs content based routing on the message using XPath
-        from("file:src/data?noop=true")
+        from("file:src/data?noop=true&include=.*.xml")
                 .choice()
-                    .when(personKarlsruhejsonpath)
-                        .log("UK message")
-                        .to("file:target/messages/uk")
                     .when(personLondonxpath)
                         .log("UK message")
                         .transform().simple("foo")
                         .to("file:target/messages/uk?fileName=uk.txt")
-                    .when(personKarlsruhejsonpath)
+                    .when(personKarlsruhexpath)
                         .log("DE message")
                         .to("file:target/messages/de")
-                    .when(personKarlsruhexpath)
+                    .otherwise()
+                        .log("Other message")
+                        .to("file:target/messages/others");
+
+        from("file:src/data?noop=true&include=.*.json")
+                .choice()
+                    .when(personLondonjsonpath)
+                        .log("UK message")
+                        .to("file:target/messages/uk")
+                    .when(personKarlsruhejsonpath)
                         .log("DE message")
                         .to("file:target/messages/de")
                     .otherwise()
