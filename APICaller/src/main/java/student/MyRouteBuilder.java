@@ -3,6 +3,7 @@ package student;
 import org.apache.camel.Predicate;
 import org.apache.camel.builder.PredicateBuilder;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.rest.RestBindingMode;
 
 /**
  * A Camel Java DSL Router
@@ -50,6 +51,16 @@ public class MyRouteBuilder extends RouteBuilder {
                     .otherwise()
                         .log("Other message")
                         .to("file:target/messages/others");
+
+//        restConfiguration().component("netty-http").host("localhost").port(80).bindingMode(RestBindingMode.auto);
+//
+//        from("timer:mytimer?repeatCount=1")
+//                .to("direct:covid-stat");
+////
+//        from("direct:covid-stat")
+//                .log("sending request")
+//                .to("https://covid-api.mmediagroup.fr/v1/cases?country=Germany&httpMethod=GET")
+//                .log("${body}");
     }
 
 }
